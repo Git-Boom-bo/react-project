@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import store from '../../redux/store'
+import {increment,decrement} from '../../redux/actions/count'
+
 
 export default class Count extends Component {
 
@@ -9,14 +11,15 @@ export default class Count extends Component {
 		const {value} = this.refs.userSelected
         //2.调用store里面定义好的逻辑  方法为store.dispatch()
                                     //*1相当于转化成数字类型
-        store.dispatch({type:'increment',data:value*1})
+        store.dispatch(increment(value*1))
 	}
 
 	//减
 	decrement = ()=>{
 		//1.获取用户的输入
 		const {value} = this.refs.userSelected
-		store.dispatch({type:'decrement',data:value*1})
+        store.dispatch(decrement(value))
+		// store.dispatch({type:'decrement',data:value*1})
 	}
 
 	//当前的和是奇数再加
@@ -26,7 +29,8 @@ export default class Count extends Component {
 		//2.得到当前的和  然后进行判断
         let count = store.getState()
         if(count % 2 === 1){
-			store.dispatch({type:'increment',data:value*1})
+        store.dispatch(increment(value*1))
+		// store.dispatch({type:'increment',data:value*1})
 		}
 	}
 	
@@ -35,7 +39,9 @@ export default class Count extends Component {
 		//1.获取用户的输入
 		const {value} = this.refs.userSelected		
 		setTimeout(()=>{
-			store.dispatch({type:'increment',data:value*1})
+			store.dispatch(increment(value*1))
+
+			// store.dispatch({type:'increment',data:value*1})
 		},500)
 	}
 
