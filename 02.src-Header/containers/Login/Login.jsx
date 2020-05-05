@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Form, Input, Button,message} from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import {connect} from 'react-redux'
-// import {Redirect} from 'react-router-dom'
-import Check from '../HOC/Check'
+import {Redirect} from 'react-router-dom'
 import {saveUserInfo} from '../../redux/actions/login'
 import {reqLogin} from '../../api'
-import Logo from '@/assets/images/logo.png'  
+import Logo from './images/logo.png'  
 import './css/login.less'
 
 const {Item} = Form 
@@ -16,7 +15,6 @@ const {Item} = Form
     (state)=>({isLogin:state.userInfo.isLogin}),//映射状态
     {saveUserInfo}//映射操作状态
 )
-@Check
 class Login extends Component {  
         //表单提交成功的回调
         onFinish = async values => {
@@ -41,10 +39,10 @@ class Login extends Component {
             else return Promise.resolve()
         }
     render() { 
-        // if(this.props.isLogin){
-        //     // this.props.history.replace('/admin')    适用于非render中
-        //     return <Redirect to='/admin'/>
-        // }
+        if(this.props.isLogin){
+            // this.props.history.replace('/admin')    适用于非render中
+            return <Redirect to='/admin'/>
+        }
         return (
             <div className ="login">
                 <header>

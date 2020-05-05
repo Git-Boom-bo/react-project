@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-// import {Redirect} from 'react-router-dom'
-import Check from '../HOC/Check'
+import {Redirect} from 'react-router-dom'
 import { Layout } from 'antd';
 import Header from './Header/Header'
-import LeftNav from './LeftNav/LeftNav'
 import './css/admin.less'
 
 // import {deleteUserInfo} from '../../redux/actions/login'
@@ -17,19 +15,16 @@ const { Footer, Sider, Content } = Layout;
     }),//映射状态
     {}//映射操作状态的方法
 )
-@Check
 class Admin extends Component {
     
    
     render() {
-        // if(!this.props.isLogin){ 
-        //     return <Redirect to='/login'/>
-        // }
+        if(!this.props.isLogin){ 
+            return <Redirect to='/login'/>
+        }
         return (
             <Layout className="admin-body">
-                <Sider>
-                    <LeftNav/>
-                </Sider>
+                <Sider>Sider</Sider>
                 <Layout>
                     <Header/>
                     <Content>Content</Content>

@@ -3,17 +3,13 @@ import {Button,Modal} from 'antd'
 import {FullscreenOutlined,FullscreenExitOutlined,ExclamationCircleOutlined} from '@ant-design/icons'
 import screenfull from 'screenfull'
 import {connect} from 'react-redux'
-import dayjs from 'dayjs'
-import {reqWeatherData} from '@/api'
 import {deleteUserInfo} from '@/redux/actions/login'
 import  './css/header.less'
 
 const { confirm } = Modal
 class Header extends Component {
     state={
-        ifFull:false,//是否全屏
-        time:dayjs().format('YYYY年MM月DD日 HH:mm:ss'), //时间
-        weatherDate:{}//天气信息
+        ifFull:false
     }
     //退出登录
     logout =()=>{
@@ -32,25 +28,12 @@ class Header extends Component {
         
         screenfull.toggle()
     }
-    //接受到天气信息
-    getWeather=async()=>{
-        let result = await reqWeatherData()
-        const {dayPictureUrl,weather,temperature} = result
-        this.setState({weatherData:{dayPictureUrl,weather,temperature}})
-    }
-
     componentDidMount(){
 		//检测屏幕的变化
 		screenfull.onchange(()=>{
 			const {isFull} = this.state
 			this.setState({isFull:!isFull})
-        })
-        //时间的定时器每秒走动
-        this.timer = setInterval(()=>{
-            this.setState({time:dayjs().format('YYYY年MM月DD日 HH:mm:ss')})
-        },1000)
-        //请求天气信息
-        this.getWeather()
+		})
     }
     
     render() {
@@ -69,10 +52,10 @@ class Header extends Component {
                     <span>首页</span>
                 </div>
                 <div className="bottom-right">
-                    <span>{this.state.time}</span>
-                    <img src={this.state.weatherDate.dayPictureUrl} alt="logo"/>
-                    <span>{this.state.weatherDate.weather}</span>
-                    <span>温度：{this.state.weatherDate.temperature}</span>
+                    <span>2020年5月4日 00:00:00</span>
+                    <img src='' alt=""/>
+                    <span>晴转多云</span>
+                    <span>温度：0~-8℃</span>
                 </div>
             </div>
         </div>
