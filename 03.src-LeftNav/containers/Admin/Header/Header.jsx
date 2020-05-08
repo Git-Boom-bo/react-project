@@ -13,7 +13,7 @@ class Header extends Component {
     state={
         ifFull:false,//是否全屏
         time:dayjs().format('YYYY年MM月DD日 HH:mm:ss'), //时间
-        weatherData:{}//天气信息
+        weatherDate:{}//天气信息
     }
     //退出登录
     logout =()=>{
@@ -50,12 +50,10 @@ class Header extends Component {
             this.setState({time:dayjs().format('YYYY年MM月DD日 HH:mm:ss')})
         },1000)
         //请求天气信息
-        // this.getWeather()
+        this.getWeather()
     }
     
     render() {
-		
-
         return (
             <div className="header">
             <div className="header-top">
@@ -68,13 +66,13 @@ class Header extends Component {
             </div>
             <div className="header-bottom">
                 <div className="bottom-left">
-                    <span>{this.props.title}</span>
+                    <span>首页</span>
                 </div>
                 <div className="bottom-right">
                     <span>{this.state.time}</span>
-                    <img src={this.state.weatherData.dayPictureUrl} alt="lg"/>
-                    <span>{this.state.weatherData.weather}</span>
-                    <span>温度：{this.state.weatherData.temperature}</span>
+                    <img src={this.state.weatherDate.dayPictureUrl} alt="logo"/>
+                    <span>{this.state.weatherDate.weather}</span>
+                    <span>温度：{this.state.weatherDate.temperature}</span>
                 </div>
             </div>
         </div>
@@ -83,8 +81,7 @@ class Header extends Component {
 }
 export default connect(
     (state)=>({
-        username:state.userInfo.user.username,
-        title:state.title
+        username:state.userInfo.user.username
     }),//映射状态
     {deleteUserInfo}//映射状态方法
 )(Header)
