@@ -28,3 +28,7 @@ export const reqList =() =>ajax.get('/manage/category/list')
 export const reqProductList=(pageNum,pageSize)=>ajax.get('/manage/product/list',{params:{pageNum,pageSize}})
 //请求搜索商品
 export const reqSearchProduct = (pageNum,pageSize,searchType,keyWord)=>ajax.get('/manage/product/search',{params:{pageNum,pageSize,[searchType]:keyWord}})
+//商品上架、下架
+export const reqUpdataProductStatus = (productId,status)=>ajax.post('/manage/product/updateStatus',{productId,status})
+//商品详情信息
+export const reqProductInfoById = (productId)=> ajax.get('/manage/product/info',{params:{productId}})

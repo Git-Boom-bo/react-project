@@ -28,6 +28,9 @@ class LeftNav extends Component {
 		if(currentKey ==='admin'){
 			return currentKey ='home'
 		}
+		if(pathname.indexOf('product')) currentKey ='product'
+			 
+		
 		//2.得到key去菜单（menu-config）中对比找到当前的菜单名字
 		let  title=''
 		menus.forEach((menuObj)=>{
@@ -79,10 +82,15 @@ class LeftNav extends Component {
 	}
 
 	render() {
-		//选择的菜单  刷新还是之前选中的菜单
-		const checkedKey = this.props.location.pathname.split('/').slice(-1)
+		
 		//选中下拉的菜单  刷新还是之前选中的菜单
 		const openKey = this.props.location.pathname.split('/')
+		//选择的菜单  刷新还是之前选中的菜单
+		let checkedKey = this.props.location.pathname.split('/').slice(-1)
+		if(openKey.indexOf('product')!==-1){
+			checkedKey=['product']
+		}
+		
 		return (
 			<div className="left-nav">
 				<div className="nav-top">
